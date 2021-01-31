@@ -28,7 +28,7 @@ const regions = {
 	russia: 'Russia',
 	singapore: 'Singapore',
 	southafrica: 'South Africa',
-	sydeny: 'Sydeny',
+	sydney: 'Sydney',
 	'us-central': 'US Central',
 	'us-east': 'US East',
 	'us-west': 'US West',
@@ -64,20 +64,20 @@ export default class extends Command {
 				`**❯ Name:** ${message.guild?.name}`,
 				`**❯ ID:** ${message.guild?.id}`,
 				`**❯ Owner:** ${message.guild?.owner?.user.tag} (${message.guild?.ownerID})`,
-				/* @ts-ignore*/
-				`**❯ Region:** ${regions[message.guild?.region]}`,
+				`**❯ Region:** ${
+					//@ts-ignore
+					regions[message.guild?.region]
+				}`,
 				`**❯ Boost Tier:** ${
 					message.guild?.premiumTier
 						? `Tier ${message.guild?.premiumTier}`
 						: 'None'
 				}`,
 				`**❯ Explicit Filter:** ${
-					/* @ts-ignore*/
-					filterLevels[message.guild?.explicitContentFilter]
+					filterLevels[message.guild?.explicitContentFilter!]
 				}`,
 				`**❯ Verification Level:** ${
-					/* @ts-ignore*/
-					verificationLevels[message.guild?.verificationLevel]
+					verificationLevels[message.guild?.verificationLevel!]
 				}`,
 				`**❯ Time Created:** ${moment(
 					message.guild?.createdTimestamp,
@@ -140,15 +140,23 @@ export default class extends Command {
 				'\u200b',
 			])
 			.addField(
-				/* @ts-ignore*/
-				`Roles [${roles?.length - 1}]` /* @ts-ignore*/,
+				`Roles [${roles?.length - 1}]`,
 				roles?.length < 10
-					? roles?.join(', ') /* @ts-ignore*/
-					: roles?.length > 10 /* @ts-ignore*/
-					? this.client.utils.trimArray(roles)
+					? roles?.join(', ')
+					: roles?.length > 10
+					? this.trimArray(roles)
 					: 'None',
 			)
 			.setTimestamp();
 		message.channel.send(embed);
+	}
+
+	trimArray(arr: any, maxLen = 10) {
+		if (arr.length > maxLen) {
+			const len = arr.length - maxLen;
+			arr = arr.slice(0, maxLen);
+			arr.push(`${len} more...`);
+		}
+		return arr;
 	}
 }

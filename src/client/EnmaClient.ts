@@ -15,13 +15,11 @@ import Spotify from 'erela.js-spotify';
 import akairo from '../models/akairo';
 import * as data from '../../config.json';
 import Log from '../utils/Logger';
-import Util from '../utils/Util';
 
 declare module 'discord-akairo' {
 	interface AkairoClient {
 		log: Log;
 		music: Manager;
-		utils: Util;
 		commandHandler: CommandHandler;
 	}
 }
@@ -30,8 +28,6 @@ class EnmaClient extends AkairoClient {
 	public settings = new MongooseProvider(akairo);
 
 	public log = Log;
-
-	public utils = Util;
 
 	public music: Manager = new Manager({
 		nodes: [
@@ -83,8 +79,8 @@ class EnmaClient extends AkairoClient {
 			},
 		},
 	});
-	// @ts-ignore
-	public listeners = new ListenerHandler(this, {
+
+	public listeners: any = new ListenerHandler(this, {
 		directory: join(__dirname, '..', 'listeners'),
 		automateCategories: true,
 	});
