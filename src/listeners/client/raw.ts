@@ -1,4 +1,5 @@
 import { Listener } from 'discord-akairo';
+import { VoicePacket } from 'erela.js';
 
 export default class RawEvent extends Listener {
 	constructor() {
@@ -8,7 +9,7 @@ export default class RawEvent extends Listener {
 		});
 	}
 
-	exec(d: any) {
+	exec(d: VoicePacket) {
 		this.client.music.updateVoiceState(d);
 	}
 }
