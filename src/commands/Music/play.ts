@@ -9,8 +9,8 @@ export default class PlayCommand extends Command {
 			aliases: ['play', 'p'],
 			description: {
 				ctx: 'Play a song or playlist from youtube and more...',
-				usage: '{prefix}play <song>',
-				example: ['{prefix}play never gonna give you up'],
+				usage: '<song>',
+				example: ['never gonna give you up'],
 			},
 			clientPermissions: ['CONNECT', 'SPEAK'],
 			args: [
@@ -40,6 +40,8 @@ export default class PlayCommand extends Command {
 				guild: message.guild?.id!,
 				textChannel: message.channel.id,
 				voiceChannel: message.member?.voice.channel!.id,
+				selfDeafen: true,
+				volume: 85,
 			});
 
 		if (player.state !== 'CONNECTED') player.connect();
@@ -52,13 +54,14 @@ export default class PlayCommand extends Command {
 				if (!player.playing && !player.paused && !player.queue.size)
 					return player.play();
 
-				const { title, uri, duration, thumbnail } = res.tracks[0];
+				const { title, duration, thumbnail } = res.tracks[0];
 
 				const trackEmbed = this.client.util
 					.embed()
+					.setColor(message.member.displayHexColor)
 					.setAuthor(
-						this.client.user?.username,
-						this.client.user?.displayAvatarURL(),
+						message.author?.username,
+						message.author?.displayAvatarURL({ dynamic: true }),
 					)
 					.setThumbnail(thumbnail!)
 					.addField('Song added to the queue 🎶', `\`${title}\``)
@@ -71,6 +74,54 @@ export default class PlayCommand extends Command {
 					.setTimestamp();
 
 				message.util?.send(trackEmbed);
+				break;
+			case 'PLAYLIST_LOADED':
+				player.queue.add(res.tracks);
+
+				if (
+					!player.playing &&
+					!player.paused &&
+					!player.queue.totalSize
+				)
+					player.play();
+
+				const playlistEmbed = this.client.util
+					.embed()
+					.setColor(message.member.displayHexColor ?? 'BLURPLE')
+					.setAuthor(
+						message.author.username,
+						message.author.displayAvatarURL({ dynamic: true }),
+					)
+					.addField(
+						`Enqueued Playlist 🎶`,
+						`\`${res.playlist?.name}\``,
+					)
+					.addField(
+						'Duration',
+						moment
+							.duration(res.playlist?.duration, 'milliseconds')
+							.format('hh:mm:ss'),
+					)
+					.setTimestamp();
+				break;
+			case 'LOAD_FAILED':
+				throw res.exception;
+				break;
+			case 'NO_MATCHES':
+				message.channel.send(
+					this.client.util
+						.embed()
+						.setAuthor(
+							message.author.username,
+							message.author.displayAvatarURL({ dynamic: true }),
+						)
+						.setColor('RED')
+						.setDescription(
+							`> I can\'t find any results for: ${song}`,
+						)
+
+						.setColor(message.member.displayHexColor ?? 'BLURPLE'),
+				);
 				break;
 		}
 	}

@@ -9,7 +9,11 @@ export default class NodeError extends Listener {
 		});
 	}
 
-	exec(node: Node, error: any) {
-		console.log(error);
+	exec(node: Node, error: Error) {
+		// @ts-ignore
+		this.client.log.info(
+			`Node ${node.options.identifier} encountered an error: ${error}`,
+			'lavalink',
+		);
 	}
 }

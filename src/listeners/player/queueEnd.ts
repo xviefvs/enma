@@ -13,6 +13,7 @@ export default class TrackStart extends Listener {
 	exec(player: Player) {
 		const embed = this.client.util
 			.embed()
+			.setColor('RANDOM')
 			.setAuthor(
 				this.client.user?.username,
 				this.client.user?.displayAvatarURL(),

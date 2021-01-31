@@ -19,6 +19,7 @@ export default class TrackStart extends Listener {
 				this.client.user?.username,
 				this.client.user?.displayAvatarURL(),
 			)
+			.setColor('YELLOW')
 			.setThumbnail(track.thumbnail!)
 			.addField('Now Playing 🎶', `\`${track.title}\``)
 			.addField(

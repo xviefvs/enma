@@ -1,6 +1,6 @@
 import { Listener } from 'discord-akairo';
 
-export default class Opened extends Listener {
+export default class Error extends Listener {
 	constructor() {
 		super('mongo_error', {
 			emitter: 'mongo',
@@ -8,7 +8,7 @@ export default class Opened extends Listener {
 		});
 	}
 
-	exec(error: any) {
+	exec(error: Error) {
 		// @ts-ignore
 		this.client.log.error(`MongoDB error: ${error}`, 'database');
 	}

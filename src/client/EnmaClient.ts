@@ -28,7 +28,7 @@ declare module 'discord-akairo' {
 class EnmaClient extends AkairoClient {
 	public settings = new MongooseProvider(akairo);
 
-	public log = Log;
+	public log: Log;
 
 	public music: Manager = new Manager({
 		nodes: [
@@ -100,11 +100,13 @@ class EnmaClient extends AkairoClient {
 				disableMentions: 'everyone',
 			},
 		);
+
+		this.log = Log;
 	}
 
 	db() {
 		try {
-			connect('mongodb://127.0.0.1:27017', {
+			connect(process.env.mongo_db!, {
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
 			});

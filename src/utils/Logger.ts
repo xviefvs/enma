@@ -4,7 +4,7 @@ export default class Log {
 	}
 	static info(message?: any, src?: string) {
 		console.log(
-			`[${this.toHHMMSS(new Date())}] INFO [${this.getSource(
+			`\u001b[36m[${this.toHHMMSS(new Date())}] INFO [${this.getSource(
 				src,
 			)}] ${message}`,
 		);
@@ -12,7 +12,7 @@ export default class Log {
 	static error(err?: any, src?: string) {
 		const message = err?.message || err || 'Unknown error';
 		console.error(
-			`[${this.toHHMMSS(new Date())}] ERROR [${this.getSource(
+			`\u001b[31m[${this.toHHMMSS(new Date())}] ERROR [${this.getSource(
 				src,
 			)}] ${message}`,
 		);

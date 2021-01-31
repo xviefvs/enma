@@ -8,8 +8,6 @@ export default class PingCommand extends Command {
 			clientPermissions: ['EMBED_LINKS'],
 			description: {
 				ctx: 'Get the bot latency',
-				usage: '{prefix}ping',
-				example: ['{prefix}ping'],
 			},
 		});
 	}
