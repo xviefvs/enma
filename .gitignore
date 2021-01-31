@@ -1,3 +1,11 @@
+# Packages
 node_modules
+
+# Environtment
 .env
+
+# Package lock
 package-lock.json
+
+# Build file
+dist

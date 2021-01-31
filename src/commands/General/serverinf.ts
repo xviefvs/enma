@@ -1,9 +1,6 @@
 import moment from 'moment';
-import { MessageEmbed } from 'discord.js';
-import { GuildMember } from 'discord.js';
+import { Message, MessageEmbed, GuildMember, Role } from 'discord.js';
 import { Command } from 'discord-akairo';
-import { Message } from 'discord.js';
-import { Role } from 'discord.js';
 
 const filterLevels = {
 	DISABLED: 'Off',
