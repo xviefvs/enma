@@ -6,11 +6,13 @@
 	"engines": {
 		"node": "14.x"
 	},
+	"type": "commonjs",
 	"scripts": {
 		"test": "echo ",
-		"start": "ts-node ./src/client/EnmaClient.ts",
+		"start": "node ./build/client/EnmaClient.js",
+		"start1": "ts-node ./src/client/EnmaClient.ts",
 		"dev": "ts-node-dev ./src/client/EnmaClient.ts",
-		"dev2": "nodemon src/client/EnmaClient.ts",
+		"dev3": "nodemon src/client/EnmaClient.ts",
 		"build": "tsc"
 	},
 	"repository": {
@@ -27,25 +29,33 @@
 	},
 	"homepage": "https://github.com/xviefvs/enma#readme",
 	"dependencies": {
+		"@2pg/oauth": "^1.0.7",
+		"@ksoft/api": "^3.1.9",
+		"@types/cors": "^2.8.9",
 		"common-tags": "^1.8.0",
+		"cors": "^2.8.5",
 		"discord-akairo": "^8.1.0",
 		"discord.js": "^12.5.1",
 		"erela.js": "^2.3.2",
 		"erela.js-spotify": "^1.2.0",
+		"express": "^4.17.1",
 		"moment": "^2.29.1",
 		"moment-duration-format": "^2.3.2",
 		"mongoose": "^5.11.14"
 	},
 	"devDependencies": {
 		"@types/common-tags": "^1.8.0",
+		"@types/express": "^4.17.11",
 		"@types/moment": "^2.13.0",
 		"@types/moment-duration-format": "^2.2.2",
 		"@types/node": "^14.14.22",
+		"@types/ws": "^7.4.0",
 		"dotenv": "^8.2.0",
 		"nodemon": "^2.0.7",
 		"prettier": "^2.2.1",
 		"ts-node": "^9.1.1",
 		"ts-node-dev": "^1.1.1",
+		"tslib": "^2.1.0",
 		"typescript": "^4.1.3"
 	}
 }

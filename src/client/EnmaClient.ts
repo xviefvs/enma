@@ -12,14 +12,18 @@ import {
 import { Message } from 'discord.js';
 import { Manager } from 'erela.js';
 import Spotify from 'erela.js-spotify';
+import { KSoftClient } from '@ksoft/api';
 import akairo from '../models/akairo';
 import * as data from '../../config.json';
 import Log from '../utils/Logger';
+// import Api from '../api/server';
+// const api = new Api();
 
 declare module 'discord-akairo' {
 	interface AkairoClient {
 		log: Log;
 		music: Manager;
+		ksoft: KSoftClient;
 		commandHandler: CommandHandler;
 	}
 }
@@ -28,6 +32,8 @@ class EnmaClient extends AkairoClient {
 	public settings = new MongooseProvider(akairo);
 
 	public log = Log;
+
+	public ksoft = new KSoftClient(process.env.lyrics_token!);
 
 	public music: Manager = new Manager({
 		nodes: [
@@ -51,7 +57,7 @@ class EnmaClient extends AkairoClient {
 		},
 	});
 
-	public commands: CommandHandler = new CommandHandler(this, {
+	public commandHandler: CommandHandler = new CommandHandler(this, {
 		directory: join(__dirname, '..', 'commands'),
 		automateCategories: true,
 		aliasReplacement: /-/g,
@@ -80,12 +86,12 @@ class EnmaClient extends AkairoClient {
 		},
 	});
 
-	public listeners: any = new ListenerHandler(this, {
+	public listenerHandler = new ListenerHandler(this, {
 		directory: join(__dirname, '..', 'listeners'),
 		automateCategories: true,
 	});
 
-	public inhibitors = new InhibitorHandler(this, {
+	public inhibitorHandler = new InhibitorHandler(this, {
 		directory: join(__dirname, '..', 'inhibitors'),
 		automateCategories: true,
 	});
@@ -99,8 +105,6 @@ class EnmaClient extends AkairoClient {
 				disableMentions: 'everyone',
 			},
 		);
-
-		this.log = Log;
 	}
 
 	db() {
@@ -115,19 +119,20 @@ class EnmaClient extends AkairoClient {
 	}
 
 	init() {
+		// api.listen();
 		this.db();
-		this.commands.useListenerHandler(this.listeners);
-		this.commands.useInhibitorHandler(this.inhibitors);
-		this.listeners.setEmitters({
-			commandHandler: this.commands,
-			listenerHandler: this.listeners,
-			inhibitorHandler: this.inhibitors,
+		this.commandHandler.useListenerHandler(this.listenerHandler);
+		this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
+		this.listenerHandler.setEmitters({
+			commandHandler: this.commandHandler,
+			listenerHandler: this.listenerHandler,
+			inhibitorHandler: this.inhibitorHandler,
 			music: this.music,
 			mongo: connection,
 		});
-		this.commands.loadAll();
-		this.listeners.loadAll();
-		this.inhibitors.loadAll();
+		this.commandHandler.loadAll();
+		this.listenerHandler.loadAll();
+		this.inhibitorHandler.loadAll();
 		this.settings.init();
 	}
 

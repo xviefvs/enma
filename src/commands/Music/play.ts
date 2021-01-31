@@ -103,6 +103,7 @@ export default class PlayCommand extends Command {
 							.format('hh:mm:ss'),
 					)
 					.setTimestamp();
+				message.util?.send(playlistEmbed);
 				break;
 			case 'LOAD_FAILED':
 				throw res.exception;

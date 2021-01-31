@@ -15,5 +15,7 @@ export default class Ready extends Listener {
 			`Logged in as ${this.client.user?.username}`,
 			'ready',
 		);
+
+		this.client.user?.setActivity(`${this.client.users.cache.size}`);
 	}
 }

@@ -137,10 +137,10 @@ export default class extends Command {
 				'\u200b',
 			])
 			.addField(
-				`Roles [${roles?.length - 1}]`,
-				roles?.length < 10
+				`Roles [${roles?.length! - 1}]`,
+				roles?.length! < 10
 					? roles?.join(', ')
-					: roles?.length > 10
+					: roles?.length! > 10
 					? this.trimArray(roles)
 					: 'None',
 			)

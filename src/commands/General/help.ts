@@ -7,7 +7,7 @@ export default class HelpCommand extends Command {
 		super('help', {
 			aliases: ['help', 'h'],
 			description: {
-				content:
+				ctx:
 					'Displays a list of available command, or detailed information for a specific command.',
 				usage: '[command]',
 			},

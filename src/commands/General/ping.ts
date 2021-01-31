@@ -14,7 +14,7 @@ export default class PingCommand extends Command {
 
 	async exec(message: Message) {
 		const sent = await message.reply('Pong!');
-		const timeDiff = Date.now() - sent.createdTimestamp;
+		const timeDiff = sent.createdTimestamp - message.createdTimestamp;
 
 		const ws = this.client.ws.ping;
 
@@ -28,6 +28,6 @@ export default class PingCommand extends Command {
 			.addField('Websocket', `\`${ws}ms\``, true)
 			.addField('Delay', `\`${timeDiff}ms\``, true);
 
-		message.util?.send(embed);
+		sent.edit(embed);
 	}
 }

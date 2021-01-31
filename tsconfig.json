@@ -1,24 +1,50 @@
 {
 	"compilerOptions": {
-		"target": "es6",
+		/* Basic Options */
+		"incremental": true,
+		"target": "esnext",
 		"module": "commonjs",
-		"declaration": true,
-		"declarationMap": true,
+		"allowJs": true,
+		"checkJs": true,
 		"sourceMap": true,
-		"outDir": "dist",
-		"rootDir": ".",
-		"moduleResolution": "node",
+		"outDir": "./build",
+		"tsBuildInfoFile": "./build/info.json",
+		"removeComments": true,
+		"importHelpers": true,
+		"downlevelIteration": true,
 		"resolveJsonModule": true,
+
+		/* Strict Type-Checking Options */
 		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
+
+		/* Additional Checks */
+		//"noUnusedLocals": true,
+		//"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+
+		/* Module Resolution Options */
+		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"removeComments": false,
+
+		/* Experimental Options */
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
-		"alwaysStrict": true,
-		"allowSyntheticDefaultImports": true,
-		"pretty": true,
-		"strictNullChecks": false
-	}
+
+		/* Advanced Options */
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": "/",
+		"paths": {
+			"tslib": ["node_modules/tslib/tslib.d.ts"]
+		}
+	},
+	"include": ["./**/*.ts"],
+	"exclude": ["node_modules/"]
 }

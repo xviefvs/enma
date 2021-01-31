@@ -1,11 +1,14 @@
 # Packages
 node_modules
 
-# Environtment
-.env
+# Environment
+.env 
 
-# Package lock
+# Package Lock
 package-lock.json
 
-# Build file
-dist
+# Build
+build
+
+# Dev
+src/api/*
