@@ -1,10 +1,10 @@
 import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
 
-export default class PauseCommand extends Command {
+export default class ResumeCommand extends Command {
 	constructor() {
-		super('pause', {
-			aliases: ['pause'],
+		super('resume', {
+			aliases: ['resume'],
 			description: {
 				ctx: 'Pause the current playing music',
 			},
@@ -33,11 +33,11 @@ export default class PauseCommand extends Command {
 				'> There is no music playing in the guild.',
 			);
 
-		if (player.paused)
-			return message.util?.send('> The music is already paused.');
+		if (!player.paused)
+			return message.util?.send('> The music is already resumed.');
 
-		player.pause(true);
+		player.pause(false);
 
-		message.util?.send('> Paused the music.');
+		message.util?.send('> Resumed the music.');
 	}
 }

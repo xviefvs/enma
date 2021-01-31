@@ -14,7 +14,8 @@ import { Manager } from 'erela.js';
 import Spotify from 'erela.js-spotify';
 import akairo from '../models/akairo';
 import * as data from '../../config.json';
-import Log from './../utils/Logger';
+import Log from '../utils/Logger';
+import Util from '../utils/Util';
 
 declare module 'discord-akairo' {
 	interface AkairoClient {
@@ -28,7 +29,9 @@ declare module 'discord-akairo' {
 class EnmaClient extends AkairoClient {
 	public settings = new MongooseProvider(akairo);
 
-	public log: Log;
+	public log = Log;
+
+	public utils = Util;
 
 	public music: Manager = new Manager({
 		nodes: [
