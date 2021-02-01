@@ -8,7 +8,7 @@ export default class BlacklistInhibitor extends Inhibitor {
 		});
 	}
 
-	exec(message: Message) {
+	async exec(message: Message) {
 		const blacklist: Array<string> = [];
 		return blacklist.includes(message.author.id);
 	}

@@ -31,7 +31,6 @@
 	"dependencies": {
 		"@2pg/oauth": "^1.0.7",
 		"@ksoft/api": "^3.1.9",
-		"@types/cors": "^2.8.9",
 		"common-tags": "^1.8.0",
 		"cors": "^2.8.5",
 		"discord-akairo": "^8.1.0",
@@ -46,7 +45,7 @@
 	"devDependencies": {
 		"@types/common-tags": "^1.8.0",
 		"@types/express": "^4.17.11",
-		"@types/moment": "^2.13.0",
+		"@types/cors": "^2.8.9",
 		"@types/moment-duration-format": "^2.2.2",
 		"@types/node": "^14.14.22",
 		"@types/ws": "^7.4.0",

@@ -15,23 +15,30 @@ import Spotify from 'erela.js-spotify';
 import { KSoftClient } from '@ksoft/api';
 import akairo from '../models/akairo';
 import * as data from '../../config.json';
-import Log from '../utils/Logger';
+import Logger from '../utils/Logger';
+import Wrapper from '../utils/DBWrapper';
 // import Api from '../api/server';
 // const api = new Api();
 
 declare module 'discord-akairo' {
 	interface AkairoClient {
-		log: Log;
+		log: typeof Logger;
 		music: Manager;
 		ksoft: KSoftClient;
+		settings: MongooseProvider;
+		db: Wrapper;
 		commandHandler: CommandHandler;
+		listenerHandler: ListenerHandler;
+		inhibitorHandler: InhibitorHandler;
 	}
 }
 
 class EnmaClient extends AkairoClient {
 	public settings = new MongooseProvider(akairo);
 
-	public log = Log;
+	public log = Logger;
+
+	public db = new Wrapper(this);
 
 	public ksoft = new KSoftClient(process.env.lyrics_token!);
 
@@ -86,12 +93,12 @@ class EnmaClient extends AkairoClient {
 		},
 	});
 
-	public listenerHandler = new ListenerHandler(this, {
+	public listenerHandler: ListenerHandler = new ListenerHandler(this, {
 		directory: join(__dirname, '..', 'listeners'),
 		automateCategories: true,
 	});
 
-	public inhibitorHandler = new InhibitorHandler(this, {
+	public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
 		directory: join(__dirname, '..', 'inhibitors'),
 		automateCategories: true,
 	});
@@ -107,7 +114,7 @@ class EnmaClient extends AkairoClient {
 		);
 	}
 
-	db() {
+	load() {
 		try {
 			connect(process.env.mongo_db!, {
 				useNewUrlParser: true,
@@ -120,7 +127,7 @@ class EnmaClient extends AkairoClient {
 
 	init() {
 		// api.listen();
-		this.db();
+		this.load();
 		this.commandHandler.useListenerHandler(this.listenerHandler);
 		this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
 		this.listenerHandler.setEmitters({
