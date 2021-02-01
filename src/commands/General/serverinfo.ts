@@ -148,7 +148,7 @@ export default class extends Command {
 		message.channel.send(embed);
 	}
 
-	trimArray(arr: any, maxLen = 10) {
+	private trimArray(arr: any, maxLen = 10) {
 		if (arr.length > maxLen) {
 			const len = arr.length - maxLen;
 			arr = arr.slice(0, maxLen);
