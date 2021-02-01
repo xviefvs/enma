@@ -1,4 +1,4 @@
-import { Message, Channel } from 'discord.js';
+import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
 
 export default class Previous extends Command {
