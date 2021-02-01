@@ -19,7 +19,7 @@ export default class ResumeCommand extends Command {
 		const bot = message.guild?.me?.voice.channel;
 
 		if (!channel)
-			message.util?.send(
+			return message.util?.send(
 				'> You need to be in a voice channel to use this command.',
 			);
 

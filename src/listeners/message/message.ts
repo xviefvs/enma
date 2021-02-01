@@ -11,7 +11,7 @@ export default class MessageEvent extends Listener {
 
 	async exec(message: Message) {
 		const { words } = await this.client.db.getDoc(message.guild?.id!);
-		if (words.icludes(message.content)) {
+		if (words.includes(message.content)) {
 			message.util
 				?.reply('Opps you just used a bad word')
 				.then((msg) => msg.delete({ timeout: 2000 }));

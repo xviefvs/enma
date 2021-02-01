@@ -61,10 +61,42 @@ export default class LyricsCommand extends Command {
 				'https://cdn.ksoft.si/images/Logo1024.png',
 			);
 			return message.util?.send(embed);
-		}
-		const songNAME = player?.queue.current?.title!;
+		} else if (player && !song) {
+			const songNAME = player?.queue.current?.title!;
 
-		const secondRES = await this.client.ksoft.lyrics.get(songNAME, {
+			const secondRES = await this.client.ksoft.lyrics.get(songNAME, {
+				textOnly: false,
+			});
+
+			const { lyrics: _lyrics, name: _name } = secondRES;
+
+			if (_lyrics.length > 2048) {
+				const _first_part = _lyrics.slice(0, 2048);
+				const _second_part = _lyrics.slice(2048);
+				embed.setDescription(_first_part);
+				embed.setTitle(_name);
+
+				message.util?.send(embed);
+				message.util?.send(
+					this.client.util
+						.embed()
+						.setColor('BLURPLE')
+						.setDescription(_second_part)
+						.setFooter(
+							'Powered by KSoft.Si',
+							'https://cdn.ksoft.si/images/Logo1024.png',
+						),
+				);
+			}
+			embed.setTitle(_name);
+			embed.setDescription(_lyrics);
+			embed.setFooter(
+				'Powered by KSoft.Si',
+				'https://cdn.ksoft.si/images/Logo1024.png',
+			);
+			return message.util?.send(embed);
+		}
+		const secondRES = await this.client.ksoft.lyrics.get(song, {
 			textOnly: false,
 		});
 
@@ -90,6 +122,10 @@ export default class LyricsCommand extends Command {
 		}
 		embed.setTitle(_name);
 		embed.setDescription(_lyrics);
+		embed.setFooter(
+			'Powered by KSoft.Si',
+			'https://cdn.ksoft.si/images/Logo1024.png',
+		);
 		return message.util?.send(embed);
 	}
 }

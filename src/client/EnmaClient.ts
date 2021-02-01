@@ -119,6 +119,7 @@ class EnmaClient extends AkairoClient {
 			connect(process.env.mongo_db!, {
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
+				useFindAndModify: false,
 			});
 		} catch (err) {
 			console.error(err);

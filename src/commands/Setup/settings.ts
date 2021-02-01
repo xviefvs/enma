@@ -30,7 +30,6 @@ export default class SettingsCommand extends Command {
 		const data = await this.client.db.getDoc(message.guild?.id!);
 		switch (option) {
 			case 'prefix':
-				console.log(option, input);
 				if (!input)
 					return message.util?.send(
 						'> You need to give me a prefix to change.',
@@ -44,7 +43,7 @@ export default class SettingsCommand extends Command {
 				await this.client.settings.set(
 					message.guild?.id!,
 					'prefix',
-					input,
+					input.replace(/_/g, ' '),
 				);
 				return message.util?.send(
 					this.client.util

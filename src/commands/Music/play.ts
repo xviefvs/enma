@@ -64,7 +64,7 @@ export default class PlayCommand extends Command {
 						message.author?.displayAvatarURL({ dynamic: true }),
 					)
 					.setThumbnail(thumbnail!)
-					.addField('Song added to the queue 🎶', `\`${title}\``)
+					.addField('Enqueued 🎶', `\`${title}\``)
 					.addField(
 						'Duration',
 						moment
@@ -94,7 +94,7 @@ export default class PlayCommand extends Command {
 					)
 					.addField(
 						`Enqueued Playlist 🎶`,
-						`\`${res.playlist?.name}\``,
+						`\`${res.playlist?.name}\` with ${res.tracks.length} songs.`,
 					)
 					.addField(
 						'Duration',

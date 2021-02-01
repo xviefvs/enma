@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		/* Basic Options */
 		"incremental": true,
-		"target": "esnext",
+		"target": "es6",
 		"module": "commonjs",
 		"allowJs": true,
 		"checkJs": true,

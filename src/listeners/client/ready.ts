@@ -9,7 +9,6 @@ export default class Ready extends Listener {
 	}
 
 	exec() {
-		console.log(this.client.guilds.cache.get('439866052684283905'));
 		this.client.music.init(this.client.user?.id);
 
 		this.client.log.info(
