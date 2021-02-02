@@ -9,7 +9,7 @@
 	"type": "commonjs",
 	"scripts": {
 		"test": "echo ",
-		"start": "node ./build/client/EnmaClient.js",
+		"start": "node ./build/src/client/EnmaClient.js",
 		"start1": "ts-node ./src/client/EnmaClient.ts",
 		"dev": "ts-node-dev ./src/client/EnmaClient.ts",
 		"dev3": "nodemon src/client/EnmaClient.ts",
@@ -31,6 +31,7 @@
 	"dependencies": {
 		"@2pg/oauth": "^1.0.7",
 		"@ksoft/api": "^3.1.9",
+		"alexflipnote.js": "^2.3.4",
 		"common-tags": "^1.8.0",
 		"cors": "^2.8.5",
 		"discord-akairo": "^8.1.0",
@@ -40,7 +41,8 @@
 		"express": "^4.17.1",
 		"moment": "^2.29.1",
 		"moment-duration-format": "^2.3.2",
-		"mongoose": "^5.11.14"
+		"mongoose": "^5.11.14",
+		"youtube-sr": "^3.0.3"
 	},
 	"devDependencies": {
 		"@types/common-tags": "^1.8.0",

@@ -1,8 +1,8 @@
+import { stripIndents } from 'common-tags';
 import { Listener } from 'discord-akairo';
 import { TextChannel } from 'discord.js';
 import { Player, Track } from 'erela.js';
-import moment from 'moment';
-import 'moment-duration-format';
+import Youtube from 'youtube-sr';
 
 export default class TrackStart extends Listener {
 	constructor() {
@@ -12,20 +12,22 @@ export default class TrackStart extends Listener {
 		});
 	}
 
-	exec(player: Player, track: Track) {
+	async exec(player: Player, track: Track) {
+		const data = await Youtube.searchOne(track.uri);
+
 		const embed = this.client.util
 			.embed()
 			.setAuthor(
-				this.client.user?.username,
-				this.client.user?.displayAvatarURL(),
+				'Now Playing',
+				'https://cdn.discordapp.com/emojis/722279362329837570.gif?v=1',
 			)
 			.setColor('YELLOW')
 			.setThumbnail(track.thumbnail!)
-			.addField('Now Playing 🎶', `\`${track.title}\``)
-			.addField(
-				'Duration',
-				moment.duration(track.duration, 'milliseconds').format('mm:ss'),
-			)
+			.addField('Title', `**[${track.title}](${track.uri})**`)
+			.addField('Uploader', track.author, true)
+			.addField('Duration', data.durationFormatted, true)
+			.addField('Views', data.views.toLocaleString(), true)
+			.addField('Uploaded at', data.uploadedAt, true)
 			.setTimestamp();
 
 		const channel = this.client.channels.cache.get(

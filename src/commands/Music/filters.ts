@@ -59,15 +59,15 @@ export default class NightcoreCommand extends Command {
 					.setDescription(
 						stripIndents`
                     Available filters (You can't stack up filters)
-					nightcore
-					bass
-					treblebass
-                    pitch
-                    speed
-					soft
-					pop
-					vaporwave
-					clear-filter
+					\`nightcore\`
+					\`bass\`
+					\`treblebass\`
+                    \`pitch\`
+                    \`speed\`
+					\`soft\`
+					\`pop\`
+					\`vaporwave\`
+					\`clear-filter\`
 					`,
 					)
 					.setTimestamp(),

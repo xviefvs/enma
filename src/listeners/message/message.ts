@@ -10,10 +10,14 @@ export default class MessageEvent extends Listener {
 	}
 
 	async exec(message: Message) {
-		const { words } = await this.client.db.getDoc(message.guild?.id!);
-		if (words.includes(message.content)) {
-			message.util
-				?.reply('Opps you just used a bad word')
+		const words = await this.client.settings.get(
+			message.guild!.id,
+			'words',
+			[],
+		);
+		if (words.includes(message.content.toLowerCase())) {
+			message
+				.reply('Oops, you just used a bad word')
 				.then((msg) => msg.delete({ timeout: 2000 }));
 
 			return message.deletable && message.delete({ timeout: 3000 });

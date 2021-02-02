@@ -1,7 +1,3 @@
-import { config } from 'dotenv';
-config({ path: '.env' });
-import { join } from 'path';
-import { connect, connection } from 'mongoose';
 import {
 	AkairoClient,
 	CommandHandler,
@@ -9,14 +5,19 @@ import {
 	InhibitorHandler,
 	MongooseProvider,
 } from 'discord-akairo';
+import { join } from 'path';
+import { connect, connection } from 'mongoose';
 import { Message } from 'discord.js';
 import { Manager } from 'erela.js';
-import Spotify from 'erela.js-spotify';
 import { KSoftClient } from '@ksoft/api';
+import { config } from 'dotenv';
+config({ path: '.env' });
+import Spotify from 'erela.js-spotify';
+import AlexClient from 'alexflipnote.js';
 import akairo from '../models/akairo';
 import * as data from '../../config.json';
 import Logger from '../utils/Logger';
-import Wrapper from '../utils/DBWrapper';
+
 // import Api from '../api/server';
 // const api = new Api();
 
@@ -26,7 +27,7 @@ declare module 'discord-akairo' {
 		music: Manager;
 		ksoft: KSoftClient;
 		settings: MongooseProvider;
-		db: Wrapper;
+		alex: AlexClient;
 		commandHandler: CommandHandler;
 		listenerHandler: ListenerHandler;
 		inhibitorHandler: InhibitorHandler;
@@ -38,7 +39,7 @@ class EnmaClient extends AkairoClient {
 
 	public log = Logger;
 
-	public db = new Wrapper(this);
+	public alex = new AlexClient(process.env.image_token!);
 
 	public ksoft = new KSoftClient(process.env.lyrics_token!);
 
@@ -149,8 +150,6 @@ class EnmaClient extends AkairoClient {
 		this.init();
 	}
 }
-
-export default EnmaClient;
 
 const bot = new EnmaClient();
 bot.build();

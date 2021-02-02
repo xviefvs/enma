@@ -82,7 +82,7 @@ export default class extends Command {
 				}`,
 				'\u200b',
 			])
-			.addField('member?', [
+			.addField('Member', [
 				`**❯ Highest Role:** ${
 					member?.roles.highest.id === message.guild?.id
 						? 'None'

@@ -1,6 +1,5 @@
 import { Message, User, PermissionString } from 'discord.js';
 import { Command, Listener } from 'discord-akairo';
-import EnmaClient from '../../client/EnmaClient';
 
 declare namespace Intl {
 	class ListFormat {
@@ -27,11 +26,11 @@ export default class missingPerms extends Listener {
 			return message.util!.reply(
 				`You are missing \`${formatted}\` permissions, you need them to use this command!`,
 			);
+		} else if (type === 'client') {
+			message.util!.reply(
+				`I am missing \`${formatted}\` permissions, I need them to run this command!`,
+			);
 		}
-
-		message.util!.reply(
-			`I am missing \`${formatted}\` permissions, I need them to run this command!`,
-		);
 	}
 
 	private formatArray(array: string[], type = 'conjunction') {

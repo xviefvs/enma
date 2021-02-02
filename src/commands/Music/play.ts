@@ -59,20 +59,10 @@ export default class PlayCommand extends Command {
 				const trackEmbed = this.client.util
 					.embed()
 					.setColor(message.member.displayHexColor)
-					.setAuthor(
-						message.author?.username,
-						message.author?.displayAvatarURL({ dynamic: true }),
-					)
-					.setThumbnail(thumbnail!)
-					.addField('Enqueued 🎶', `\`${title}\``)
 					.addField(
-						'Duration',
-						moment
-							.duration(duration, 'milliseconds')
-							.format('mm:ss'),
-					)
-					.setTimestamp();
-
+						'Enqueued 🎶',
+						`\`${title}\` [${message.author}]`,
+					);
 				message.util?.send(trackEmbed);
 				break;
 			case 'PLAYLIST_LOADED':

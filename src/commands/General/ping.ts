@@ -13,7 +13,7 @@ export default class PingCommand extends Command {
 	}
 
 	async exec(message: Message) {
-		const sent = await message.reply('Pong!');
+		const sent = await message.util!.reply('Pong!');
 		const timeDiff = sent.createdTimestamp - message.createdTimestamp;
 
 		const ws = this.client.ws.ping;

@@ -141,20 +141,8 @@ export default class SearchCommand extends Command {
 				const trackEmbed = this.client.util
 					.embed()
 					.setColor(message.member.displayHexColor)
-					.setAuthor(
-						message.author?.username,
-						message.author?.displayAvatarURL({ dynamic: true }),
-					)
-					.setThumbnail(thumbnail!)
-					.addField('Song added to the queue 🎶', `\`${title}\``)
-					.addField(
-						'Duration',
-						moment
-							.duration(duration, 'milliseconds')
-							.format('mm:ss'),
-					)
+					.addField('Enqueued 🎶', `\`${title}\` [${message.author}]`)
 					.setTimestamp();
-
 				message.util?.send(trackEmbed);
 				break;
 		}
