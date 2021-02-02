@@ -7,6 +7,7 @@ export default class SearchCommand extends Command {
 	constructor() {
 		super('search', {
 			aliases: ['search', 'sr'],
+			clientPermissions: ['EMBED_LINKS'],
 			description: {
 				ctx: 'Search a song to play',
 				usage: '<song>',

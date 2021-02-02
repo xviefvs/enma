@@ -5,6 +5,7 @@ export default class QueueCommand extends Command {
 	constructor() {
 		super('queue', {
 			aliases: ['queue', 'q'],
+			clientPermissions: ['EMBED_LINKS'],
 			description: {
 				ctx: 'Show the song queue for current guild.',
 			},

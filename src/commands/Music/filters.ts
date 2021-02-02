@@ -1,7 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
-import filters from '../../utils/filters';
 
 export default class NightcoreCommand extends Command {
 	constructor() {

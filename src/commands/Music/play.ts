@@ -12,7 +12,7 @@ export default class PlayCommand extends Command {
 				usage: '<song>',
 				example: ['never gonna give you up'],
 			},
-			clientPermissions: ['CONNECT', 'SPEAK'],
+			clientPermissions: ['CONNECT', 'SPEAK', 'EMBED_LINKS'],
 			args: [
 				{
 					id: 'song',

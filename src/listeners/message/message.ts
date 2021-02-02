@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message, TextChannel } from 'discord.js';
 import { Listener } from 'discord-akairo';
 
 export default class MessageEvent extends Listener {

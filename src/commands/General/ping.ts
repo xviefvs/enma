@@ -5,7 +5,7 @@ export default class PingCommand extends Command {
 	constructor() {
 		super('ping', {
 			aliases: ['ping', 'pong'],
-			clientPermissions: ['EMBED_LINKS'],
+			clientPermissions: ['EMBED_LINKS', 'ADMINISTRATOR'],
 			description: {
 				ctx: 'Get the bot latency',
 			},

@@ -5,6 +5,7 @@ export default class LyricsCommand extends Command {
 	constructor() {
 		super('lyrics', {
 			aliases: ['lyrics', 'ly'],
+			clientPermissions: ['EMBED_LINKS'],
 			description: {
 				ctx: 'Get the lyrics of a song.',
 				usage: '[song]',

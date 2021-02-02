@@ -116,7 +116,7 @@ class EnmaClient extends AkairoClient {
 
 	load() {
 		try {
-			connect(process.env.mongo_db!, {
+			connect(process.env.mongo_dev!, {
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
 				useFindAndModify: false,
@@ -149,6 +149,8 @@ class EnmaClient extends AkairoClient {
 		this.init();
 	}
 }
+
+export default EnmaClient;
 
 const bot = new EnmaClient();
 bot.build();
