@@ -7,7 +7,7 @@ export default class SearchCommand extends Command {
 	constructor() {
 		super('search', {
 			aliases: ['search', 'sr'],
-			clientPermissions: ['EMBED_LINKS'],
+			clientPermissions: ['EMBED_LINKS', 'ADD_REACTIONS', 'CONNECT'],
 			description: {
 				ctx: 'Search a song to play',
 				usage: '<song>',
@@ -144,6 +144,32 @@ export default class SearchCommand extends Command {
 					.addField('Enqueued 🎶', `\`${title}\` [${message.author}]`)
 					.setTimestamp();
 				message.util?.send(trackEmbed);
+				break;
+			case 'PLAYLIST_LOADED':
+				return message.util!.send(
+					"> Bruh you can't search a playlist use play command instead?.",
+				);
+				break;
+			case 'LOAD_FAILED':
+				if (!player.queue.current) player.destroy();
+				throw res.exception;
+				break;
+			case 'NO_MATCHES':
+				if (!player.queue.current) player.destroy();
+				message.channel.send(
+					this.client.util
+						.embed()
+						.setAuthor(
+							message.author.username,
+							message.author.displayAvatarURL({ dynamic: true }),
+						)
+						.setColor('RED')
+						.setDescription(
+							`> I can\'t find any results for: ${song}`,
+						)
+
+						.setColor(message.member.displayHexColor ?? 'BLURPLE'),
+				);
 				break;
 		}
 	}

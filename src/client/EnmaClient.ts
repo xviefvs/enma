@@ -28,6 +28,7 @@ declare module 'discord-akairo' {
 		ksoft: KSoftClient;
 		settings: MongooseProvider;
 		alex: AlexClient;
+		config: typeof data;
 		commandHandler: CommandHandler;
 		listenerHandler: ListenerHandler;
 		inhibitorHandler: InhibitorHandler;
@@ -36,6 +37,8 @@ declare module 'discord-akairo' {
 
 class EnmaClient extends AkairoClient {
 	public settings = new MongooseProvider(akairo);
+
+	public config = data;
 
 	public log = Logger;
 
@@ -146,7 +149,7 @@ class EnmaClient extends AkairoClient {
 	}
 
 	build() {
-		super.login(process.env.bot_token);
+		super.login(process.env.bot_dev);
 		this.init();
 	}
 }

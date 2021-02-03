@@ -96,9 +96,11 @@ export default class PlayCommand extends Command {
 				message.util?.send(playlistEmbed);
 				break;
 			case 'LOAD_FAILED':
+				if (!player.queue.current) player.destroy();
 				throw res.exception;
 				break;
 			case 'NO_MATCHES':
+				if (!player.queue.current) player.destroy();
 				message.channel.send(
 					this.client.util
 						.embed()
