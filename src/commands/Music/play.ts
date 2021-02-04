@@ -27,6 +27,8 @@ export default class PlayCommand extends Command {
 				'> You need to be in a voice channel to use this command.',
 			);
 
+		if (!song) song = message.attachments.first()?.proxyURL!;
+
 		if (!song)
 			return message.util?.send(
 				'> You need to give me a song name or link to search.',
@@ -44,6 +46,15 @@ export default class PlayCommand extends Command {
 				volume: 85,
 			});
 
+		if (
+			player.playing &&
+			message.member.voice.channel.id !==
+				message.guild?.me?.voice.channel?.id
+		)
+			return message.channel.send(
+				'> You need to be in the same voice channel as mine to play a song.',
+			);
+
 		if (player.state !== 'CONNECTED') player.connect();
 
 		switch (res.loadType) {
@@ -59,14 +70,16 @@ export default class PlayCommand extends Command {
 				const trackEmbed = this.client.util
 					.embed()
 					.setColor(message.member.displayHexColor)
-					.addField(
-						'Enqueued 🎶',
-						`\`${title}\` [${message.author}]`,
-					);
+					.addField('Enqueued 🎶', `\`${title}\` [${message.author}]`)
+					.setTimestamp();
 				message.util?.send(trackEmbed);
 				break;
 			case 'PLAYLIST_LOADED':
-				player.queue.add(res.tracks);
+				const songsToAdd = res.tracks.length;
+				for (let i = 0; i < songsToAdd; i++) {
+					const song = res.tracks[i];
+					player.queue.add(song);
+				}
 
 				if (
 					!player.playing &&
@@ -84,7 +97,7 @@ export default class PlayCommand extends Command {
 					)
 					.addField(
 						`Enqueued Playlist 🎶`,
-						`\`${res.playlist?.name}\` with ${res.tracks.length} songs.`,
+						`**[${res.playlist?.name}](${song})** with ${res.tracks.length} songs.`,
 					)
 					.addField(
 						'Duration',

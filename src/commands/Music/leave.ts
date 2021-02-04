@@ -36,7 +36,7 @@ export default class LeaveCommand extends Command {
 		player.destroy();
 
 		return message.util!.send(
-			`Left **${user.name}** ${this.client.config.emotes.leave}`,
+			`Left **${user.name}**   ${this.client.config.emotes.leave}`,
 		);
 	}
 }

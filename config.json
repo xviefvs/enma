@@ -3,6 +3,9 @@
 	"emotes": {
 		"slider": "▬",
 		"sharingan": "<a:sharingan:806447190968238090>",
-		"leave": "<a:leave:780106042386284566>"
+		"leave": "<a:leave:780106042386284566>",
+		"spin_main": "https://raw.githubusercontent.com/xviefvs/enma/main/assets/spinMain.gif",
+		"spin_alt": "https://raw.githubusercontent.com/xviefvs/enma/main/assets/spinAlt.gif",
+		"sharingan_spin": "https://cdn.discordapp.com/emojis/724033555763560458.gif?v=1"
 	}
 }

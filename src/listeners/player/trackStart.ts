@@ -13,10 +13,7 @@ export default class TrackStart extends Listener {
 	async exec(player: Player, track: Track) {
 		const embed = this.client.util
 			.embed()
-			.setAuthor(
-				'Now Playing',
-				'https://raw.githubusercontent.com/xviefvs/enma/main/assets/musicSpin.gif',
-			)
+			.setAuthor('Now Playing', this.client.config.emotes.spin_main)
 			.setColor('YELLOW')
 			.setThumbnail(track.thumbnail!)
 			.setDescription(`**[${track.title}](${track.uri})**`)

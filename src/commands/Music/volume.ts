@@ -1,17 +1,24 @@
 import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
 
-export default class SkipCommand extends Command {
+export default class VolumeCommand extends Command {
 	constructor() {
-		super('skip', {
-			aliases: ['skip', 's'],
+		super('volume', {
+			aliases: ['volume', 'v'],
 			description: {
-				ctx: 'Skip the current playing song.',
+				ctx: 'Set the volume of a song.',
+				usage: '<volume>',
+				example: ['100'],
 			},
+			args: [
+				{
+					id: 'volume',
+				},
+			],
 		});
 	}
 
-	exec(message: Message) {
+	exec(message: Message, { volume }: { volume: number }) {
 		const player = this.client.music.players.get(message.guild?.id!);
 		const channel = message.member?.voice.channel;
 		const bot = message.guild?.me?.voice.channel;
@@ -29,12 +36,14 @@ export default class SkipCommand extends Command {
 		if (!player)
 			return message.util?.send('> There is no music playing to skip.');
 
-		message.util?.send(
-			this.client.util
-				.embed()
-				.setColor(message.member?.displayHexColor ?? 'BLURPLE')
-				.setDescription(`Skipped \`${player.queue.current?.title}\``),
+		if (!volume || isNaN(volume) || volume < 0 || volume > 200)
+			return message.channel.send(
+				'> You need to give me a number from 1-200',
+			);
+
+		player.setVolume(volume);
+		return message.channel.send(
+			`> Successfully set the volume to \`${volume}%\``,
 		);
-		player.stop();
 	}
 }

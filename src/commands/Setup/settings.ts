@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message, TextChannel } from 'discord.js';
 import { Command } from 'discord-akairo';
 
 export default class SettingsCommand extends Command {

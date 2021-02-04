@@ -72,34 +72,40 @@ export default class SearchCommand extends Command {
 
 				message.channel.send(generateEmbed(0)).then((message) => {
 					if (total.length <= 10) return;
+					try {
+						message.react('➡️');
+						const collector = message.createReactionCollector(
+							(reaction, user) =>
+								['⬅️', '➡️'].includes(reaction.emoji.name) &&
+								user.id === author.id,
+							// time out after a minute
+							{ time: 60000 },
+						);
 
-					message.react('➡️');
-					const collector = message.createReactionCollector(
-						(reaction, user) =>
-							['⬅️', '➡️'].includes(reaction.emoji.name) &&
-							user.id === author.id,
-						// time out after a minute
-						{ time: 60000 },
-					);
+						let currentIndex = 0;
+						collector.on('collect', (reaction) => {
+							// remove the existing reactions
+							message.reactions.removeAll().then(async () => {
+								// increase/decrease index
+								reaction.emoji.name === '⬅️'
+									? (currentIndex -= 10)
+									: (currentIndex += 10);
+								// edit message with new embed
+								message.edit(generateEmbed(currentIndex));
 
-					let currentIndex = 0;
-					collector.on('collect', (reaction) => {
-						// remove the existing reactions
-						message.reactions.removeAll().then(async () => {
-							// increase/decrease index
-							reaction.emoji.name === '⬅️'
-								? (currentIndex -= 10)
-								: (currentIndex += 10);
-							// edit message with new embed
-							message.edit(generateEmbed(currentIndex));
-
-							// react with left arrow if it isn't the start (await is used so that the right arrow always goes after the left)
-							if (currentIndex !== 0) await message.react('⬅️');
-							// react with right arrow if it isn't the end
-							if (currentIndex + 10 < total.length)
-								message.react('➡️');
+								// react with left arrow if it isn't the start (await is used so that the right arrow always goes after the left)
+								if (currentIndex !== 0)
+									await message.react('⬅️');
+								// react with right arrow if it isn't the end
+								if (currentIndex + 10 < total.length)
+									message.react('➡️');
+							});
 						});
-					});
+					} catch (err) {
+						return message.channel.send(
+							'I am missing permission to edit message.',
+						);
+					}
 				});
 				const filter = (m: Message) =>
 					m.author.id === message.author.id;

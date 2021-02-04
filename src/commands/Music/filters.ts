@@ -62,8 +62,8 @@ export default class NightcoreCommand extends Command {
 					\`nightcore\`
 					\`bass\`
 					\`treblebass\`
-                    \`pitch\`
-                    \`speed\`
+                    \`pitch <value>\`
+                    \`speed <value>\`
 					\`soft\`
 					\`pop\`
 					\`vaporwave\`
@@ -81,7 +81,7 @@ export default class NightcoreCommand extends Command {
 					guildId: message.guild!.id,
 				});
 				message.util!.send('> Clearing filters...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'Successfully cleared all the filters.',
 				);
@@ -97,7 +97,7 @@ export default class NightcoreCommand extends Command {
 					},
 				});
 				message.util!.send('> Adding **nightcore** filter...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'> Successfully enabled **nightcore** filter.',
 				);
@@ -115,7 +115,7 @@ export default class NightcoreCommand extends Command {
 					tremolo: { depth: 0.3, frequency: 14 },
 				});
 				message.util!.send('> Adding **vaporwave** filter...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'> Successfully enabled **vaporwave** filter.',
 				);
@@ -142,7 +142,7 @@ export default class NightcoreCommand extends Command {
 					],
 				});
 				message.util!.send('> Adding **soft** filter...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'> Successfully enabled **soft** filter.',
 				);
@@ -169,7 +169,7 @@ export default class NightcoreCommand extends Command {
 					],
 				});
 				message.util!.send('> Adding **treblebass** filter...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'Successfully enabled **treblebass** filter.',
 				);
@@ -196,7 +196,7 @@ export default class NightcoreCommand extends Command {
 					],
 				});
 				message.util!.send('> Adding **pop** filter...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'> Successfully enabled **pop** filter.',
 				);
@@ -223,31 +223,43 @@ export default class NightcoreCommand extends Command {
 					],
 				});
 				message.util!.send('> Adding **bass** filter...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'> Successfully enabled **bass** filter.',
 				);
 				break;
 			case 'pitch':
+				if (!value)
+					return message.channel.send(
+						'> You need to give me a value from 1-2',
+					);
+				if (Number(value) > 2 || Number(value) <= 0)
+					return message.channel.send('> The value can only be 1-2');
 				player.node.send({
 					op: 'filters',
 					guildId: message.guild!.id,
 					timescale: { pitch: Number(value) },
 				});
 				message.util!.send('> Adding **pitch** filter...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'> Successfully enabled **pitch** filter to ' + value,
 				);
 				break;
 			case 'speed':
+				if (!value)
+					return message.channel.send(
+						'> You need to give me a value from 1-2',
+					);
+				if (Number(value) > 2 || Number(value) <= 0)
+					return message.channel.send('> The value can only be 1-2');
 				player.node.send({
 					op: 'filters',
 					guildId: message.guild!.id,
 					timescale: { speed: Number(value) },
 				});
 				message.util!.send('> Adding **speed** filter...');
-				await this.delay(4000);
+				await this.delay(4500);
 				return message.util!.send(
 					'> Successfully enabled **speed** filter to ' + value,
 				);

@@ -25,7 +25,7 @@ export default class NowPlaying extends Command {
 
 		message.util!.send('> Fetching current track data...');
 
-		const data = await Youtube.searchOne(song!.uri!);
+		const data = await Youtube.searchOne(song!.title!);
 
 		const end =
 			duration! > 6.048e8
@@ -34,10 +34,7 @@ export default class NowPlaying extends Command {
 
 		const embed = this.client.util
 			.embed()
-			.setAuthor(
-				'Now Playing',
-				'https://raw.githubusercontent.com/xviefvs/enma/main/assets/musicSpin.gif',
-			)
+			.setAuthor('Now Playing', this.client.config.emotes.sharingan_spin)
 			.setColor(message.member?.displayHexColor ?? 'BLURPLE')
 			.setThumbnail(data.thumbnail?.url!)
 			.addFields([

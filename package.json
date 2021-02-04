@@ -30,8 +30,11 @@
 	"homepage": "https://github.com/xviefvs/enma#readme",
 	"dependencies": {
 		"@2pg/oauth": "^1.0.7",
+		"@anishshobith/deeptype": "^1.1.0",
 		"@ksoft/api": "^3.1.9",
 		"alexflipnote.js": "^2.3.4",
+		"canvas": "^2.6.1",
+		"canvas-constructor": "^3.2.0",
 		"common-tags": "^1.8.0",
 		"cors": "^2.8.5",
 		"discord-akairo": "^8.1.0",
@@ -42,6 +45,7 @@
 		"moment": "^2.29.1",
 		"moment-duration-format": "^2.3.2",
 		"mongoose": "^5.11.14",
+		"node-superfetch": "^0.1.11",
 		"string-progressbar": "^1.0.3",
 		"youtube-sr": "^3.0.3"
 	},

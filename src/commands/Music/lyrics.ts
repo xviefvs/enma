@@ -37,9 +37,9 @@ export default class LyricsCommand extends Command {
 
 			const { lyrics, name } = firstRES;
 
-			if (lyrics.length > 2048) {
-				const first_part = lyrics.slice(0, 2048);
-				const second_part = lyrics.slice(2048);
+			if (lyrics.length >= 2047) {
+				const first_part = lyrics.slice(0, 2047);
+				const second_part = lyrics.slice(2047);
 				embed.setDescription(first_part);
 				embed.setTitle(name);
 
@@ -71,9 +71,9 @@ export default class LyricsCommand extends Command {
 
 			const { lyrics: _lyrics, name: _name } = secondRES;
 
-			if (_lyrics.length > 2048) {
-				const _first_part = _lyrics.slice(0, 2048);
-				const _second_part = _lyrics.slice(2048);
+			if (_lyrics.length >= 2047) {
+				const _first_part = _lyrics.slice(0, 2047);
+				const _second_part = _lyrics.slice(2047);
 				embed.setDescription(_first_part);
 				embed.setTitle(_name);
 
@@ -103,9 +103,9 @@ export default class LyricsCommand extends Command {
 
 		const { lyrics: _lyrics, name: _name } = secondRES;
 
-		if (_lyrics.length > 2048) {
-			const _first_part = _lyrics.slice(0, 2048);
-			const _second_part = _lyrics.slice(2048);
+		if (_lyrics.length >= 2047) {
+			const _first_part = _lyrics.slice(0, 2047);
+			const _second_part = _lyrics.slice(2047);
 			embed.setDescription(_first_part);
 			embed.setTitle(_name);
 

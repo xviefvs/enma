@@ -17,9 +17,8 @@ import AlexClient from 'alexflipnote.js';
 import akairo from '../models/akairo';
 import * as data from '../../config.json';
 import Logger from '../utils/Logger';
-
-// import Api from '../api/server';
-// const api = new Api();
+import Api from '../api/server';
+const api = new Api();
 
 declare module 'discord-akairo' {
 	interface AkairoClient {
@@ -74,18 +73,13 @@ class EnmaClient extends AkairoClient {
 		aliasReplacement: /-/g,
 		handleEdits: true,
 		commandUtil: true,
-		commandUtilLifetime: 60000,
+		commandUtilLifetime: 30000,
 		commandUtilSweepInterval: 6000,
 		defaultCooldown: 3000,
 		ignoreCooldown: data.owners,
 		ignorePermissions: data.owners,
-		prefix: (message: Message) => {
-			if (message.guild) {
-				return this.settings.get(message.guild.id, 'prefix', 'em!');
-			}
-
-			return 'em!';
-		},
+		prefix: (message: Message) =>
+			this.settings.get(message.guild!.id, 'prefix', 'em!'),
 		argumentDefaults: {
 			prompt: {
 				timeout: 'Time ran out, command has been cancelled',
@@ -114,6 +108,7 @@ class EnmaClient extends AkairoClient {
 			},
 			{
 				disableMentions: 'everyone',
+				partials: ['REACTION', 'USER', 'MESSAGE', 'CHANNEL'],
 			},
 		);
 	}
@@ -131,7 +126,7 @@ class EnmaClient extends AkairoClient {
 	}
 
 	init() {
-		// api.listen();
+		api.start();
 		this.load();
 		this.commandHandler.useListenerHandler(this.listenerHandler);
 		this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
@@ -146,14 +141,14 @@ class EnmaClient extends AkairoClient {
 		this.listenerHandler.loadAll();
 		this.inhibitorHandler.loadAll();
 		this.settings.init();
+		this.login(process.env.bot_dev);
 	}
 
 	build() {
-		super.login(process.env.bot_dev);
 		this.init();
 	}
 }
-
+export default EnmaClient;
 const bot = new EnmaClient();
 bot.build();
 export { bot };
