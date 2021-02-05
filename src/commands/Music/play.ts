@@ -2,6 +2,8 @@ import moment from 'moment';
 import 'moment-duration-format';
 import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
+import { TrackUtils } from 'erela.js';
+import yt from 'youtube-sr';
 
 export default class PlayCommand extends Command {
 	constructor() {
@@ -75,16 +77,17 @@ export default class PlayCommand extends Command {
 				message.util?.send(trackEmbed);
 				break;
 			case 'PLAYLIST_LOADED':
-				const songsToAdd = res.tracks.length;
-				for (let i = 0; i < songsToAdd; i++) {
-					const song = res.tracks[i];
-					player.queue.add(song);
-				}
+				// if (res.tracks.length > 300)
+				// 	return message.channel.send(
+				// 		'> You can only play a playlist with 300 tracks or less.',
+				// 	);
+
+				player.queue.add(res.tracks);
 
 				if (
 					!player.playing &&
 					!player.paused &&
-					!player.queue.totalSize
+					player.queue.totalSize === res.tracks.length
 				)
 					player.play();
 
@@ -95,15 +98,17 @@ export default class PlayCommand extends Command {
 						message.author.username,
 						message.author.displayAvatarURL({ dynamic: true }),
 					)
+					.setThumbnail(res.tracks[0].thumbnail!)
 					.addField(
 						`Enqueued Playlist 🎶`,
-						`**[${res.playlist?.name}](${song})** with ${res.tracks.length} songs.`,
+						`**[${res.playlist?.name}](${song})** with \`${res.tracks.length}\` tracks.`,
 					)
 					.addField(
 						'Duration',
 						moment
 							.duration(res.playlist?.duration, 'milliseconds')
 							.format('hh:mm:ss'),
+						true,
 					)
 					.setTimestamp();
 				message.util?.send(playlistEmbed);

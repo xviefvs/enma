@@ -1,23 +1,23 @@
 import {
 	AkairoClient,
 	CommandHandler,
-	ListenerHandler,
 	InhibitorHandler,
+	ListenerHandler,
 	MongooseProvider,
 } from 'discord-akairo';
-import { join } from 'path';
-import { connect, connection } from 'mongoose';
 import { Message } from 'discord.js';
-import { Manager } from 'erela.js';
-import { KSoftClient } from '@ksoft/api';
 import { config } from 'dotenv';
-config({ path: '.env' });
+import { KSoftClient } from '@ksoft/api';
+import { Manager } from 'erela.js';
+import { connect, connection } from 'mongoose';
+import { join } from 'path';
 import Spotify from 'erela.js-spotify';
 import AlexClient from 'alexflipnote.js';
-import akairo from '../models/akairo';
 import * as data from '../../config.json';
-import Logger from '../utils/Logger';
 import Api from '../api/server';
+import akairo from '../models/akairo';
+import Logger from '../utils/Logger';
+config({ path: '.env' });
 const api = new Api();
 
 declare module 'discord-akairo' {

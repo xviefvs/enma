@@ -4,7 +4,7 @@ import { Command } from 'discord-akairo';
 export default class LyricsCommand extends Command {
 	constructor() {
 		super('lyrics', {
-			aliases: ['lyrics', 'ly'],
+			aliases: ['lyrics', 'lys', 'ly'],
 			clientPermissions: ['EMBED_LINKS'],
 			description: {
 				ctx: 'Get the lyrics of a song.',

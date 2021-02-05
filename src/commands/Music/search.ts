@@ -50,7 +50,7 @@ export default class SearchCommand extends Command {
 			case 'SEARCH_RESULT':
 				const total = res.tracks;
 				const generateEmbed = (start: number) => {
-					const current = total.slice(start, start + 10);
+					const current = total.slice(start, start + 20);
 
 					const embed = this.client.util
 						.embed()
@@ -71,7 +71,7 @@ export default class SearchCommand extends Command {
 				const author = message.author;
 
 				message.channel.send(generateEmbed(0)).then((message) => {
-					if (total.length <= 10) return;
+					if (total.length <= 20) return;
 					try {
 						message.react('➡️');
 						const collector = message.createReactionCollector(
@@ -88,8 +88,8 @@ export default class SearchCommand extends Command {
 							message.reactions.removeAll().then(async () => {
 								// increase/decrease index
 								reaction.emoji.name === '⬅️'
-									? (currentIndex -= 10)
-									: (currentIndex += 10);
+									? (currentIndex -= 20)
+									: (currentIndex += 20);
 								// edit message with new embed
 								message.edit(generateEmbed(currentIndex));
 
@@ -97,7 +97,7 @@ export default class SearchCommand extends Command {
 								if (currentIndex !== 0)
 									await message.react('⬅️');
 								// react with right arrow if it isn't the end
-								if (currentIndex + 10 < total.length)
+								if (currentIndex + 20 < total.length)
 									message.react('➡️');
 							});
 						});

@@ -117,7 +117,7 @@ router.post('/music/remove', (req, res) => {
 	return res.send('Removed');
 });
 
-router.get('/music/lyrics', async (req, res) => {
+router.post('/music/lyrics', async (req, res) => {
 	const player = bot.music.players.get(req.body.guild);
 	if (!player) return res.send('No player found.');
 
