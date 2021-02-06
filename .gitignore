@@ -9,3 +9,6 @@ package-lock.json
 
 # Build
 build
+
+# Secret
+src/commands/General/screenshot.ts

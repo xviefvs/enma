@@ -5,11 +5,11 @@ import { Command } from 'discord-akairo';
 export default class NightcoreCommand extends Command {
 	constructor() {
 		super('filter', {
-			aliases: ['filter'],
+			aliases: ['filters', 'filter'],
 			description: {
 				ctx: 'Enable filters for the current playing song.',
-				usage: '<filter name> <on/off>',
-				example: ['filter nightcore on'],
+				usage: '<filters name> <on/off>',
+				example: ['filters nightcore on'],
 			},
 			args: [
 				{
@@ -37,14 +37,14 @@ export default class NightcoreCommand extends Command {
 				'> You need to be in a voice channel to use this command.',
 			);
 
-		if (channel?.id !== bot?.id)
-			return message.util?.send(
-				'> You are not in the same voice channel as mine to use this command.',
-			);
-
 		if (!player)
 			return message.util?.send(
 				'> There is no music playing in the guild.',
+			);
+
+		if (channel?.id !== bot?.id)
+			return message.util?.send(
+				'> You are not in the same voice channel as mine to use this command.',
 			);
 
 		if (!name)
@@ -58,7 +58,7 @@ export default class NightcoreCommand extends Command {
 					)
 					.setDescription(
 						stripIndents`
-                    Available filters (You can't stack up filters)
+                    Available filters \`(You can't stack up filters and sometime filter dont't work)\`
 					\`nightcore\`
 					\`bass\`
 					\`treblebass\`

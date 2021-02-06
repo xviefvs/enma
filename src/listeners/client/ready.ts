@@ -1,4 +1,5 @@
 import { Listener } from 'discord-akairo';
+import akairo from '../../models/akairo';
 
 export default class Ready extends Listener {
 	constructor() {
@@ -29,6 +30,8 @@ export default class Ready extends Listener {
 			'inhibitor',
 		);
 
-		this.client.user?.setActivity(`${this.client.users.cache.size}`);
+		this.client.user?.setActivity(`Spotify`, {
+			type: 'LISTENING',
+		});
 	}
 }

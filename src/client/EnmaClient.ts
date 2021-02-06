@@ -5,14 +5,14 @@ import {
 	ListenerHandler,
 	MongooseProvider,
 } from 'discord-akairo';
-import { Message } from 'discord.js';
+import { Message, PermissionString } from 'discord.js';
 import { config } from 'dotenv';
 import { KSoftClient } from '@ksoft/api';
 import { Manager } from 'erela.js';
 import { connect, connection } from 'mongoose';
 import { join } from 'path';
 import Spotify from 'erela.js-spotify';
-import AlexClient from 'alexflipnote.js';
+import fetch from 'node-fetch';
 import * as data from '../../config.json';
 import Api from '../api/server';
 import akairo from '../models/akairo';
@@ -26,8 +26,8 @@ declare module 'discord-akairo' {
 		music: Manager;
 		ksoft: KSoftClient;
 		settings: MongooseProvider;
-		alex: AlexClient;
 		config: typeof data;
+		fetch: typeof fetch;
 		commandHandler: CommandHandler;
 		listenerHandler: ListenerHandler;
 		inhibitorHandler: InhibitorHandler;
@@ -41,7 +41,7 @@ class EnmaClient extends AkairoClient {
 
 	public log = Logger;
 
-	public alex = new AlexClient(process.env.image_token!);
+	public fetch = fetch;
 
 	public ksoft = new KSoftClient(process.env.lyrics_token!);
 
@@ -50,7 +50,30 @@ class EnmaClient extends AkairoClient {
 			{
 				host: process.env.lavalink_host!,
 				password: process.env.lavalink_pass!,
-				port: Number(process.env.lavalink_port!),
+				port: 36619,
+				retryAmount: 5,
+				retryDelay: 3000,
+			},
+			{
+				host: process.env.backup_lavalink_host!,
+				password: process.env.backup_lavalink_pass!,
+				port: 80,
+				retryAmount: 5,
+				retryDelay: 3000,
+			},
+			{
+				host: 'lava.danbot.host',
+				password: 'DBH',
+				port: 2333,
+				retryAmount: 5,
+				retryDelay: 3000,
+			},
+			{
+				host: 'lava2.danbot.host',
+				password: 'DBH',
+				port: 2333,
+				retryAmount: 3,
+				retryDelay: 3000,
 			},
 		],
 		plugins: [
@@ -141,7 +164,7 @@ class EnmaClient extends AkairoClient {
 		this.listenerHandler.loadAll();
 		this.inhibitorHandler.loadAll();
 		this.settings.init();
-		this.login(process.env.bot_dev);
+		this.login(process.env.bot_token);
 	}
 
 	build() {

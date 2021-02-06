@@ -9,6 +9,7 @@ export default class LavalinkStats extends Command {
 			description: {
 				ctx: '.',
 			},
+			ownerOnly: true,
 		});
 	}
 	async exec(message: Message) {

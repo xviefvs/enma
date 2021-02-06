@@ -18,9 +18,9 @@ export default class MessageEvent extends Listener {
 		if (words.includes(message.content.toLowerCase())) {
 			message
 				.reply('Oops, you just used a bad word')
-				.then((msg) => msg.delete({ timeout: 2000 }));
+				.then((msg) => msg.delete({ timeout: 3500 }));
 
-			return message.deletable && message.delete({ timeout: 3000 });
+			return message.deletable && message.delete({ timeout: 3500 });
 		}
 	}
 }

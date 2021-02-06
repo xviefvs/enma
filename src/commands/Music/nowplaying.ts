@@ -25,7 +25,9 @@ export default class NowPlaying extends Command {
 
 		message.util!.send('> Fetching current track data...');
 
-		const data = await Youtube.searchOne(song?.identifier ?? song!.title!);
+		const data = await Youtube.searchOne(
+			song?.uri!.includes('youtube.com') ? song.uri! : song!.title!,
+		);
 
 		const end =
 			duration! > 6.048e8
