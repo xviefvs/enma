@@ -10,7 +10,6 @@ export default class NodeConnect extends Listener {
 	}
 
 	exec(node: Node) {
-		// @ts-ignore
 		this.client.log.info(
 			`Connected to ${node.options.identifier}`,
 			'lavalink',

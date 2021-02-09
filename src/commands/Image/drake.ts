@@ -34,7 +34,9 @@ export default class Drake extends Command {
 		);
 		await this.client
 			.fetch(
-				`https://api.alexflipnote.dev/drake?top=${top}&bottom=${bottom}`,
+				`https://api.alexflipnote.dev/drake?top=${encodeURIComponent(
+					top,
+				)}&bottom=${encodeURIComponent(bottom)}`,
 				{
 					headers: {
 						Authorization: process.env.image_token!,

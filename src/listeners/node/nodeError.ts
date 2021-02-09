@@ -10,8 +10,7 @@ export default class NodeError extends Listener {
 	}
 
 	exec(node: Node, error: Error) {
-		// @ts-ignore
-		this.client.log.info(
+		this.client.log.error(
 			`Node ${node.options.identifier} encountered an error: ${error}`,
 			'lavalink',
 		);

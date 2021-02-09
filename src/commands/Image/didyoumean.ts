@@ -34,7 +34,9 @@ export default class didyoumean extends Command {
 		);
 		await this.client
 			.fetch(
-				`https://api.alexflipnote.dev/didyoumean?top=${top}&bottom=${bottom}`,
+				`https://api.alexflipnote.dev/didyoumean?top=${encodeURIComponent(
+					top,
+				)}&bottom=${encodeURIComponent(bottom)}`,
 				{
 					headers: {
 						Authorization: process.env.image_token!,

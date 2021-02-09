@@ -22,7 +22,9 @@ export default class Supreme extends Command {
 
 		await this.client
 			.fetch(
-				`https://api.alexflipnote.dev//supreme?text=${text}&dark=true`,
+				`https://api.alexflipnote.dev//supreme?text=${encodeURIComponent(
+					text,
+				)}&dark=true`,
 				{
 					headers: {
 						Authorization: process.env.image_token!,

@@ -5,7 +5,7 @@ import {
 	ListenerHandler,
 	MongooseProvider,
 } from 'discord-akairo';
-import { Message, PermissionString } from 'discord.js';
+import { Message } from 'discord.js';
 import { config } from 'dotenv';
 import { KSoftClient } from '@ksoft/api';
 import { Manager } from 'erela.js';
@@ -61,20 +61,13 @@ class EnmaClient extends AkairoClient {
 				retryAmount: 5,
 				retryDelay: 3000,
 			},
-			{
-				host: 'lava.danbot.host',
-				password: 'DBH',
-				port: 2333,
-				retryAmount: 5,
-				retryDelay: 3000,
-			},
-			{
-				host: 'lava2.danbot.host',
-				password: 'DBH',
-				port: 2333,
-				retryAmount: 3,
-				retryDelay: 3000,
-			},
+			// {
+			// 	host: 'lava.danbot.host',
+			// 	password: 'DBH',
+			// 	port: 2333,
+			// 	retryAmount: 5,
+			// 	retryDelay: 3000,
+			// },
 		],
 		plugins: [
 			new Spotify({
@@ -138,7 +131,7 @@ class EnmaClient extends AkairoClient {
 
 	load() {
 		try {
-			connect(process.env.mongo_dev!, {
+			connect(process.env.mongo_db!, {
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
 				useFindAndModify: false,

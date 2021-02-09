@@ -3,18 +3,26 @@ class Logger {
 		return src?.toUpperCase() || 'OTHER';
 	}
 	public info(message?: any, src?: string) {
-		console.log(
-			`\u001b[36m[${this.toHHMMSS(new Date())}] INFO [${this.getSource(
-				src,
-			)}] ${message}`,
+		console.info(
+			`\u001b[1m\u001b[33;1m[ ${this.toHHMMSS(
+				new Date(),
+			)} ] INFO [ ${this.getSource(src)} ] ${message}`,
 		);
 	}
 	public error(err?: any, src?: string) {
 		const message = err?.message || err || 'Unknown error';
 		console.error(
-			`\u001b[31m[${this.toHHMMSS(new Date())}] ERROR [${this.getSource(
-				src,
-			)}] ${message}`,
+			`\u001b[1m\u001b[31;1m[ ${this.toHHMMSS(
+				new Date(),
+			)} ] ERROR [ ${this.getSource(src)} ] ${message}`,
+		);
+	}
+
+	public debug(msg?: string, src?: string) {
+		console.debug(
+			`\u001b[1m\u001b[36;1m[ ${this.toHHMMSS(
+				new Date(),
+			)} ] DEBUG [ ${this.getSource(src)} ] ${msg}`,
 		);
 	}
 

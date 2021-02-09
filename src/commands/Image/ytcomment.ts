@@ -44,7 +44,9 @@ export default class YTComment extends Command {
 			)
 			.then((res) => res.buffer())
 			.then((buffer) =>
-				message.channel.send({ files: [{ attachment: buffer }] }),
+				message.channel.send({
+					files: [{ attachment: buffer, name: 'ytcomment.png' }],
+				}),
 			);
 	}
 }
