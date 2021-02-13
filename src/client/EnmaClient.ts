@@ -142,7 +142,8 @@ class EnmaClient extends AkairoClient {
 	}
 
 	init() {
-		api.start();
+		// Dashboard gonna be delayed until the bot hit 1000 servers.
+		// api.start();
 		this.load();
 		this.commandHandler.useListenerHandler(this.listenerHandler);
 		this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
@@ -165,6 +166,38 @@ class EnmaClient extends AkairoClient {
 	}
 }
 export default EnmaClient;
+async function removeReactionSlowdown() {
+	const fs = require('fs').promises;
+	const filePath =
+		process.cwd() + '/node_modules/discord.js/src/rest/RequestHandler.js';
+	const file = await fs.readFile(
+		filePath,
+		{
+			encoding: 'utf8',
+		},
+		() => {},
+	);
+	const found = file.match(/getAPIOffset\(serverDate\) \+ 250/gim);
+	if (found) {
+		console.log(
+			'Removing additional 250ms timeout for reactions.\nWill need to restart process for changes to take effect.',
+		);
+		const newFile = file.replace(
+			/getAPIOffset\(serverDate\) \+ 250/gim,
+			'getAPIOffset(serverDate)',
+		);
+		await fs.writeFile(
+			filePath,
+			newFile,
+			{
+				encoding: 'utf8',
+			},
+			() => {},
+		);
+		return process.exit();
+	}
+}
+removeReactionSlowdown();
 const bot = new EnmaClient();
 bot.build();
 export { bot };

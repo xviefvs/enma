@@ -23,7 +23,7 @@ export default class QueueCommand extends Command {
 
 		const queue = player.queue;
 		const generateEmbed = (start: number) => {
-			const current = queue.slice(start, start + 20);
+			const current = queue.slice(start, start + 15);
 			var page = 0;
 			const embed = this.client.util
 				.embed()
@@ -55,7 +55,7 @@ export default class QueueCommand extends Command {
 		const author = message.author;
 
 		message.channel.send(generateEmbed(0)).then((message) => {
-			if (queue.length <= 20) return;
+			if (queue.length <= 15) return;
 			try {
 				message.react('➡️');
 				const collector = message.createReactionCollector(
@@ -72,15 +72,15 @@ export default class QueueCommand extends Command {
 					message.reactions.removeAll().then(async () => {
 						// increase/decrease index
 						reaction.emoji.name === '⬅️'
-							? (currentIndex -= 20)
-							: (currentIndex += 20);
+							? (currentIndex -= 15)
+							: (currentIndex += 15);
 						// edit message with new embed
 						message.edit(generateEmbed(currentIndex));
 
 						// react with left arrow if it isn't the start (await is used so that the right arrow always goes after the left)
 						if (currentIndex !== 0) await message.react('⬅️');
 						// react with right arrow if it isn't the end
-						if (currentIndex + 20 < queue.length)
+						if (currentIndex + 15 < queue.length)
 							message.react('➡️');
 					});
 				});

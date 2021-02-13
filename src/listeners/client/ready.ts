@@ -1,5 +1,4 @@
 import { Listener } from 'discord-akairo';
-import akairo from '../../models/akairo';
 
 export default class Ready extends Listener {
 	constructor() {

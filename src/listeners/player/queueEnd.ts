@@ -25,5 +25,6 @@ export default class TrackStart extends Listener {
 			player.textChannel!,
 		) as TextChannel;
 		if (channel) channel.send(embed);
+		return player.destroy();
 	}
 }

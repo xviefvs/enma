@@ -6,7 +6,7 @@ export default class MemeCommand extends Command {
 		super('meme', {
 			aliases: ['memes', 'meme'],
 			description: {
-				ctx: 'Get memes from reddit',
+				ctx: 'Get memes from reddit and only the quality one 👌',
 			},
 		});
 	}

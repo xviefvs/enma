@@ -8,5 +8,79 @@
 		"spin_alt": "https://raw.githubusercontent.com/xviefvs/enma/main/assets/spinAlt.gif",
 		"sharingan_spin": "https://cdn.discordapp.com/emojis/724033555763560458.gif?v=1",
 		"settings": "<:settings:780101648827416597>"
-	}
+	},
+	"jobs": [
+		{
+			"name": "Developer",
+			"amount": 5000
+		},
+		{
+			"name": "Designer",
+			"amount": 4000
+		},
+		{
+			"name": "Construction Worker",
+			"amount": 2500
+		},
+		{
+			"name": "Chief",
+			"amount": 2000
+		},
+		{
+			"name": "Mechanic",
+			"amount": 2500
+		},
+		{
+			"name": "Content Creator",
+			"amount": 4500
+		},
+		{
+			"name": "Artist",
+			"amount": 4500
+		},
+		{
+			"name": "Painter",
+			"amount": 3000
+		},
+		{
+			"name": "Truck Driver",
+			"amount": 3500
+		},
+		{
+			"name": "Uber Driver",
+			"amount": 1500
+		},
+		{
+			"name": "Project manager",
+			"amount": 4000
+		},
+		{
+			"name": "Dentist",
+			"amount": 4500
+		},
+		{
+			"name": "IT Manager",
+			"amount": 3500
+		},
+		{
+			"name": "Nurse",
+			"amount": 3500
+		},
+		{
+			"name": "Accountant",
+			"amount": 4000
+		},
+		{
+			"name": "Lawyer",
+			"amount": 4500
+		},
+		{
+			"name": "Game Developer",
+			"amount": 5000
+		},
+		{
+			"name": "Data Scientist",
+			"amount": 6500
+		}
+	]
 }

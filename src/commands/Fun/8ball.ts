@@ -1,7 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
-import fetch from 'node-fetch';
 
 export default class magic extends Command {
 	constructor() {
@@ -27,7 +26,8 @@ export default class magic extends Command {
 				'> You need to give me a question to answers.',
 			);
 
-		const res = await fetch(`https://nekos.life/api/v2/8ball`)
+		await this.client
+			.fetch(`https://nekos.life/api/v2/8ball`)
 			.then((res) => res.json())
 			.then((json) => {
 				const embed = this.client.util

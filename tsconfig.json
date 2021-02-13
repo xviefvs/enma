@@ -45,6 +45,6 @@
 			"tslib": ["node_modules/tslib/tslib.d.ts"]
 		}
 	},
-	"include": ["./**/*.ts"],
+	"include": ["./**/*.ts", "lib/InlineReply.js"],
 	"exclude": ["node_modules/"]
 }

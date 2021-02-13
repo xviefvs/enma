@@ -34,15 +34,13 @@ export default class SearchCommand extends Command {
 
 		const res = await this.client.music.search(song, message.member);
 
-		const player =
-			this.client.music.players.get(message.guild!.id) ??
-			this.client.music.create({
-				guild: message.guild?.id!,
-				textChannel: message.channel.id,
-				voiceChannel: message.member?.voice.channel!.id,
-				selfDeafen: true,
-				volume: 85,
-			});
+		const player = this.client.music.create({
+			guild: message.guild?.id!,
+			textChannel: message.channel.id,
+			voiceChannel: message.member?.voice.channel!.id,
+			selfDeafen: true,
+			volume: 85,
+		});
 
 		if (player.state !== 'CONNECTED') player.connect();
 
@@ -50,7 +48,7 @@ export default class SearchCommand extends Command {
 			case 'SEARCH_RESULT':
 				const total = res.tracks;
 				const generateEmbed = (start: number) => {
-					const current = total.slice(start, start + 20);
+					const current = total.slice(start, start + 15);
 
 					const embed = this.client.util
 						.embed()
@@ -71,7 +69,7 @@ export default class SearchCommand extends Command {
 				const author = message.author;
 
 				message.channel.send(generateEmbed(0)).then((message) => {
-					if (total.length <= 20) return;
+					if (total.length <= 15) return;
 					try {
 						message.react('➡️');
 						const collector = message.createReactionCollector(
@@ -88,8 +86,8 @@ export default class SearchCommand extends Command {
 							message.reactions.removeAll().then(async () => {
 								// increase/decrease index
 								reaction.emoji.name === '⬅️'
-									? (currentIndex -= 20)
-									: (currentIndex += 20);
+									? (currentIndex -= 15)
+									: (currentIndex += 15);
 								// edit message with new embed
 								message.edit(generateEmbed(currentIndex));
 
@@ -97,7 +95,7 @@ export default class SearchCommand extends Command {
 								if (currentIndex !== 0)
 									await message.react('⬅️');
 								// react with right arrow if it isn't the end
-								if (currentIndex + 20 < total.length)
+								if (currentIndex + 15 < total.length)
 									message.react('➡️');
 							});
 						});

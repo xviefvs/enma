@@ -1,5 +1,5 @@
-import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
+import { Message } from 'discord.js';
 
 export default class PingCommand extends Command {
 	constructor() {
@@ -13,7 +13,7 @@ export default class PingCommand extends Command {
 	}
 
 	async exec(message: Message) {
-		const sent = await message.util!.reply('Pong!');
+		const sent = await message.util!.send('Pong!');
 		const timeDiff = sent.createdTimestamp - message.createdTimestamp;
 
 		const ws = this.client.ws.ping;

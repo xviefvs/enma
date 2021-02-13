@@ -38,15 +38,13 @@ export default class PlayCommand extends Command {
 
 		const res = await this.client.music.search(song, message.member);
 
-		const player =
-			this.client.music.players.get(message.guild!.id) ??
-			this.client.music.create({
-				guild: message.guild?.id!,
-				textChannel: message.channel.id,
-				voiceChannel: message.member?.voice.channel!.id,
-				selfDeafen: true,
-				volume: 85,
-			});
+		const player = this.client.music.create({
+			guild: message.guild?.id!,
+			textChannel: message.channel.id,
+			voiceChannel: message.member?.voice.channel!.id,
+			selfDeafen: true,
+			volume: 85,
+		});
 
 		if (
 			player.playing &&
