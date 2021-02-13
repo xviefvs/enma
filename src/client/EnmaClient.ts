@@ -165,7 +165,7 @@ class EnmaClient extends AkairoClient {
 		this.init();
 	}
 }
-export default EnmaClient;
+
 async function removeReactionSlowdown() {
 	const fs = require('fs').promises;
 	const filePath =

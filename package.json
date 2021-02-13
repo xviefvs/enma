@@ -48,6 +48,7 @@
 		"node-fetch": "^2.6.1",
 		"node-superfetch": "^0.1.11",
 		"string-progressbar": "^1.0.3",
+		"text-diff": "^1.0.1",
 		"youtube-sr": "^3.0.3"
 	},
 	"devDependencies": {
