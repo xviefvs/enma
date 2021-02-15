@@ -8,4 +8,4 @@ node_modules
 build
 
 # Secret
-src/commands/General/screenshot.ts
+src/commands/Misc/screenshot.ts

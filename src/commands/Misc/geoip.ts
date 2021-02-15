@@ -6,7 +6,6 @@ export default class GeoIP extends Command {
 	constructor() {
 		super('geoip', {
 			aliases: ['geoip'],
-			ownerOnly: true,
 			args: [
 				{
 					id: 'ip',
